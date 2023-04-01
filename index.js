@@ -8,11 +8,10 @@ import { Server } from "socket.io";
 const app = express();
 app.use(cors);
 const httpServer = createServer();
-
-const PORT = process.env.PORT || 5000;
+const PORT = 9000;
 const io = new Server(httpServer, {
   cors: {
-		origin: "https://heuristic.vercel.app",
+		origin: "https://heuristic.vercel.app/",
 		methods: [ "GET", "POST" ]
 	}
 });
@@ -31,6 +30,7 @@ io.on("connection", (socket) => {
 		io.to(data.to).emit("callAccepted", data.signal)
 	})
 });
+
 
 httpServer.listen(PORT,() => console.log("server is running on port "+PORT));
 
